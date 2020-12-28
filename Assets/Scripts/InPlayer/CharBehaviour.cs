@@ -3,23 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))][RequireComponent(typeof(Collider2D)), RequireComponent(typeof(SpriteRenderer))]
-[HelpURL("https://github.com/Cauehcs?tab=repositories")][DisallowMultipleComponent]
+[HelpURL("https://github.com/Cauehcs?tab=repositories")][DisallowMultipleComponent][ExecuteInEditMode][RequireComponent(typeof(Kit))]
 public class CharBehaviour : MonoBehaviour
 {
 
     public Kit kit;
     public KitMovement kitMovement;
     public KitAttack kitAttack;
+    public KitStatus kitStatus;
 
-    public bool movement, attack;
+    public bool movement, attack, status;
 
     public int referenceKits;
-
-    private void Awake() {
-
-        kit = this.gameObject.AddComponent<Kit>();
-
-    }
 
     private void Update() {
 
@@ -28,14 +23,16 @@ public class CharBehaviour : MonoBehaviour
     }
 
     void ReferenceKits() {
-        referenceKits++;
 
-        if(referenceKits == 1) {
+            if (kitMovement == null && movement) kitMovement = this.gameObject.GetComponent<KitMovement>();
+            if (kitAttack == null && attack) kitAttack = this.gameObject.GetComponent<KitAttack>();
+            if (kitStatus == null && status) kitStatus = this.gameObject.GetComponent<KitStatus>();
 
-            kitMovement = this.gameObject.GetComponent<KitMovement>();
-            kitAttack = this.gameObject.GetComponent<KitAttack>();
+            if(kit == null) {
 
-        }
+                kit = this.gameObject.AddComponent<Kit>();
+
+            }
 
     }
 
