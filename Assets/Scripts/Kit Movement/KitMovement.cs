@@ -17,7 +17,9 @@ public class KitMovement : MonoBehaviour
     public enum AxisRaw { On, Off };
     public AxisRaw enumWalkAxisRaw, enumRunAxisRaw, enumCrouchAxisRaw;
 
-    public bool canMovement, canRun, canJump, canCrouch, WalkAxisRaw, runAxisRaw, crouchAxisRaw, movementInAir, bigJump, wallJump, doubleJump, soar;
+    public LayerMask groundLayer;
+
+    public bool canMovement, canRun, canJump, canCrouch, WalkAxisRaw, runAxisRaw, crouchAxisRaw, movementInAir, bigJump, wallJump, doubleJump, soar, inGround;
     public float speed, runMultiplier, crouchMultiplier;
     [Range(-1, 1)] public float horizontalAxis;
 
@@ -32,6 +34,7 @@ public class KitMovement : MonoBehaviour
     private void Update() {
 
         WalkRunAndCrouch();
+        Jump();
 
     }
 
@@ -61,7 +64,9 @@ public class KitMovement : MonoBehaviour
     }
 
     public void Jump() {
-        
+
+        inGround = Physics2D.OverlapCircle(new Vector2(walkCollider.bounds.center.x, walkCollider.bounds.min.y), .2f, groundLayer);
+
     }
 
 }
