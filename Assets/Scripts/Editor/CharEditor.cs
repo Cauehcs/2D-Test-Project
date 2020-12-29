@@ -413,9 +413,9 @@ public class CharEditor : Editor
             EditorGUILayout.Space(1f);
             if (jump = EditorGUILayout.Foldout(jump, "Jump", true, EditorStyles.foldoutHeader)) {
 
-                PlayerPrefs.SetInt("jump", wrc ? 1 : 0); PlayerPrefs.Save();
+                PlayerPrefs.SetInt("jump", jump ? 1 : 0); PlayerPrefs.Save();
 
-                //Start: Can Jump
+                //Start: Jump
                 EditorGUILayout.Space(1f);
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Jump", GUILayout.Width(150f));
@@ -439,7 +439,7 @@ public class CharEditor : Editor
                 }
 
                 EditorGUILayout.EndHorizontal();
-                //End: Can Jump
+                //End: Jump
 
                 if (canJump == 0) {
 
